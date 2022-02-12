@@ -1,0 +1,39 @@
+service: sls-express-ts-webpack
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-northeast-1
+  stage: ${opt:stage, 'dev'}
+  profile: default
+custom:
+  webpack:
+    webpackConfig: "webpack.config.js"
+    packager: "yarn"
+    includeModules: true
+  serverless-offline:
+    useChildProcesses: true
+  serverless-layers:
+    layersDeploymentBucket: io-cristallum-sls-layers
+
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-layers
+functions:
+  app:
+    handler: src/routes.handler
+    environment:
+      APP_VERSION: ${env:APP_VERSION}
+      APP_NAME: ${env:APP_NAME}
+    events:
+      - httpApi:
+          path: "/{proxy+}"
+          method: "*"
+exclude:
+  - package.json
+  - package-lock.json
