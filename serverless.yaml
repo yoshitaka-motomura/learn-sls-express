@@ -29,9 +29,9 @@ plugins:
 functions:
   app:
     handler: src/routes.handler
-    environment:
-      APP_VERSION: ${env:APP_VERSION}
-      APP_NAME: ${env:APP_NAME}
+    # environment:
+    #   APP_VERSION: ${env:APP_VERSION}
+    #   APP_NAME: ${env:APP_NAME}
     events:
       - httpApi:
           path: "/{proxy+}"
