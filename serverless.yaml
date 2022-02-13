@@ -5,9 +5,10 @@ provider:
   name: aws
   runtime: nodejs14.x
   region: ap-northeast-1
-  stage: ${opt:stage, 'dev'}
+  stage: ${opt:stage, self:custom.defaultStage}
   profile: default
 custom:
+  defaultStage: dev
   webpack:
     webpackConfig: "webpack.config.js"
     packager: "yarn"
@@ -24,6 +25,7 @@ plugins:
   - serverless-webpack
   - serverless-offline
   - serverless-layers
+  # - serverless-domain-manager
 functions:
   app:
     handler: src/routes.handler

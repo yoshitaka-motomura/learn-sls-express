@@ -12,6 +12,18 @@
       "esModuleInterop": true,
       "lib": ["es2020"],
       "rootDir": "./",
-      "resolveJsonModule": true
-    }
+      "resolveJsonModule": true,
+      "typeRoots": [
+        "node_modules/@types",
+        "types"
+      ],
+      "strict": true,
+    },
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+    ]
   }
